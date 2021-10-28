@@ -9,11 +9,13 @@ public class IntermediateCalculator implements ActionListener {
     //Create Panel for Frame
     Panel calcPanel;
     //Buttons for numbers
-    Button zero,one,two,three,four,five,six,seven,eight,nine;
+    private Button zero,one,two,three,four,five,six,seven,eight,nine;
     //Operation Buttons (need to add temp, metric to imperial, modulo, exponent, etc.)
-    Button add,subtract,multiply,divide, equal;
+    private Button add,subtract,multiply,divide, equal;
     //Additional buttons
     Button clear;
+
+    String num1, num2, output;
 
 
 
@@ -62,7 +64,7 @@ public class IntermediateCalculator implements ActionListener {
         clear.addActionListener(this);
 
 
-
+        BasicOperations.printOUT();ß
 
         //Needs to be played around with
         textField = new TextField(20);
@@ -124,8 +126,16 @@ public class IntermediateCalculator implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
+        if(e.getSource() == zero){
+            num1 = textField.getText();
+            num2 = "0";
+            output = num1 + num2;
+            System.out.println("RECEIVED ZERO");
+        }
 
     }
+
+    //Put addition, subtraction, ..., into their own classes?
     /*public void windowClosing(WindowEvent e){
         System.exit(0);
     }*/
@@ -133,3 +143,4 @@ public class IntermediateCalculator implements ActionListener {
 
 
 }
+
