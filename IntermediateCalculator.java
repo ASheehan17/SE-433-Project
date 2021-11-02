@@ -207,36 +207,41 @@ public class IntermediateCalculator implements ActionListener {
             initialNumber = textField.getText();
             placeholder = textField.getText();
             textField.setText("");
-            //textField.setText("");
             System.out.println(initialNumber);
             
         }
         if(e.getSource() == subtract){
             basicoperation = "subtract";
             initialNumber = textField.getText();
+            placeholder = textField.getText();
+            textField.setText("");
         }
         if(e.getSource() == multiply){
             basicoperation = "multiply";
             initialNumber = textField.getText();
+            placeholder = textField.getText();
+            textField.setText("");
         }
         if(e.getSource() == divide){
             basicoperation = "divide";
             initialNumber = textField.getText();
+            placeholder = textField.getText();
+            textField.setText("");
         }
         if(e.getSource() == calculate){
             currentNumber = textField.getText();
-            System.out.println(placeholder);
             System.out.println(Float.parseFloat(currentNumber)+ Float.parseFloat(placeholder));
+            
+     
+            float operated = BasicOperations.calculate(basicoperation, Float.parseFloat(placeholder), Float.parseFloat(currentNumber));
 
-            System.out.println("HELLO");
+            textField.setText(String.valueOf(operated));
 
-            //System.out.println(Float.parseFloat(initialNumber));
-            //System.out.println(Float.parseFloat(currentNumber));
-            //float operated = BasicOperations.calculate(basicoperation, Float.parseFloat(initialNumber), Float.parseFloat(currentNumber));
-            //textField.setText(String.valueOf(operated));
-            System.out.println(operated);
-            //Pass in basic operations, initial Number, and current Number
-            //float operated = BasicOperations(basicoperation, initialNumber, currentNumber)
+
+
+        }
+        if(e.getSource() == clear){
+            textField.setText("");
         }
 
     }
