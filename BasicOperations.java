@@ -11,7 +11,7 @@ public class BasicOperations {
             result = num1 + num2;
             System.out.println("Adding......");
             System.out.println(result);
-        } else if ( operation == "subtraction"){
+        } else if ( operation == "subtract"){
             result = num1 - num2;
             System.out.println("Subtracting......");
         } else if (operation == "multiply"){
