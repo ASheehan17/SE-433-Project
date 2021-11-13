@@ -13,14 +13,17 @@ public class IntermediateCalculator implements ActionListener {
     private Button zero,one,two,three,four,five,six,seven,eight,nine;
     //Operation Buttons (need to add temp, metric to imperial, modulo, exponent, etc.)
     private Button add,subtract,multiply,divide, calculate;
+    private Button percent, exp, square, squareroot; 
+    private Button CtoF, FtoC, CtoK, KtoC;
     //Additional buttons
     Button clear;
 
-    String initialNumber, currentNumber, output, basicoperation, placeholder;
+    String initialNumber, currentNumber, output, basicoperation, placeholder, singleoperand;
+    String calcMode;
     //String currentNumber, output, basicoperation;
 
     
-    Float operated;
+    Double operated;
 
 
 
@@ -50,6 +53,18 @@ public class IntermediateCalculator implements ActionListener {
         calculate = new Button("=");
         clear = new Button("Clear");
 
+        percent = new Button("%");
+        exp = new Button("e");
+        square = new Button("^2");
+        squareroot = new Button("sqrt");
+
+        CtoF = new Button("C -> F");
+        FtoC = new Button("F -> C");
+
+        CtoK = new Button("C -> K");
+        KtoC = new Button("K -> C");
+
+
 
         zero.addActionListener(this);
         one.addActionListener(this);
@@ -67,6 +82,14 @@ public class IntermediateCalculator implements ActionListener {
         divide.addActionListener(this);
         calculate.addActionListener(this);
         clear.addActionListener(this);
+        percent.addActionListener(this);
+        exp.addActionListener(this);
+        square.addActionListener(this);
+        squareroot.addActionListener(this);
+        CtoF.addActionListener(this);
+        FtoC.addActionListener(this);
+        CtoK.addActionListener(this);
+        KtoC.addActionListener(this);
 
 
 
@@ -76,9 +99,6 @@ public class IntermediateCalculator implements ActionListener {
 
         gridLayout = new GridLayout(4,4);
         calcFrame.setLayout(gridLayout);
-
-
-
 
 
 
@@ -99,6 +119,17 @@ public class IntermediateCalculator implements ActionListener {
         calcPanel.add(calculate);
         calcPanel.add(clear);
 
+        calcPanel.add(percent);
+        calcPanel.add(exp);
+        calcPanel.add(square);
+        calcPanel.add(squareroot);
+
+
+        calcPanel.add(CtoF);
+        calcPanel.add(FtoC);
+        calcPanel.add(CtoK);
+        calcPanel.add(KtoC);
+
         calcFrame.add(calcPanel);
         calcFrame.setSize(200,200);
         calcFrame.setVisible(true);
@@ -109,24 +140,6 @@ public class IntermediateCalculator implements ActionListener {
                 System.exit(0);
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-        
-
-
     }
 
     public void actionPerformed(ActionEvent e){
@@ -196,11 +209,7 @@ public class IntermediateCalculator implements ActionListener {
 
 
 
-
-
-
-
-
+        //Dual Operand Operations
 
         if(e.getSource() == add){
             basicoperation = "add";
@@ -208,6 +217,7 @@ public class IntermediateCalculator implements ActionListener {
             placeholder = textField.getText();
             textField.setText("");
             System.out.println(initialNumber);
+            calcMode = "basic";
             
         }
         if(e.getSource() == subtract){
@@ -215,31 +225,98 @@ public class IntermediateCalculator implements ActionListener {
             initialNumber = textField.getText();
             placeholder = textField.getText();
             textField.setText("");
+            calcMode = "basic";
         }
         if(e.getSource() == multiply){
             basicoperation = "multiply";
             initialNumber = textField.getText();
             placeholder = textField.getText();
             textField.setText("");
+            calcMode = "basic";
         }
         if(e.getSource() == divide){
             basicoperation = "divide";
             initialNumber = textField.getText();
             placeholder = textField.getText();
             textField.setText("");
+            calcMode = "basic";
         }
+
+
+        //Single Operand Calculations
+
+        if(e.getSource() == percent){
+            singleoperand = "percent";
+            initialNumber = textField.getText();
+            //May have to input placeholder in with 
+            placeholder = textField.getText();
+
+            textField.setText("");
+            calcMode = "single";
+        }
+
+        if(e.getSource() == exp){
+            singleoperand = "exp";
+            initialNumber = textField.getText();
+            placeholder = textField.getText();
+            
+            textField.setText("");
+            calcMode = "single";
+        }
+
+        if(e.getSource()== square){
+            singleoperand = "square";
+            initialNumber = textField.getText();
+            placeholder = textField.getText();
+
+            textField.setText("");
+            calcMode = "single";
+        }
+
+        if(e.getSource() == squareroot){
+            singleoperand = "squareroot";
+            initialNumber = textField.getText();
+            placeholder = textField.getText();
+
+            textField.setText("");
+            calcMode = "single";
+        }
+
+
+
+
+
+
+
+
+
         if(e.getSource() == calculate){
-            currentNumber = textField.getText();
-            System.out.println(Float.parseFloat(currentNumber)+ Float.parseFloat(placeholder));
+
+            if(calcMode.equals("basic")){
+                currentNumber = textField.getText();
+
+                operated = BasicOperations.calculate(basicoperation, Double.parseDouble(placeholder), Double.parseDouble(currentNumber));
+                textField.setText(String.valueOf(operated));
+
+            } else if (calcMode.equals("single")){
+                operated = SingleOperandOperations.calculationLogic(singleoperand, Double.parseDouble(placeholder));
+                System.out.println(operated);
+                textField.setText(String.valueOf(operated));
+
+            }
             
      
-            float operated = BasicOperations.calculate(basicoperation, Float.parseFloat(placeholder), Float.parseFloat(currentNumber));
 
-            textField.setText(String.valueOf(operated));
 
 
 
         }
+
+
+
+
+
+
         if(e.getSource() == clear){
             textField.setText("");
         }

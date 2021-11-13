@@ -5,8 +5,8 @@ public class BasicOperations {
     public static void printHelp(){
         System.out.println("HELP");
     }
-    public static float calculate(String operation, float num1, float num2){
-        float result = 0;
+    public static double calculate(String operation, double num1, double num2){
+        double result = 0;
         if(operation == "add"){
             result = num1 + num2;
             System.out.println("Adding......");
