@@ -16,9 +16,9 @@ public class IntermediateCalculator implements ActionListener {
     private Button percent, exp, square, squareroot; 
     private Button CtoF, FtoC, CtoK, KtoC;
     //Additional buttons
-    Button clear;
+    Button decimal, clear;
 
-    String initialNumber, currentNumber, output, basicoperation, placeholder, singleoperand;
+    String initialNumber, currentNumber, output, basicoperation, placeholder, singleoperand, temperature;
     String calcMode;
     //String currentNumber, output, basicoperation;
 
@@ -51,7 +51,9 @@ public class IntermediateCalculator implements ActionListener {
         multiply = new Button("*");
         divide = new Button("/");
         calculate = new Button("=");
+
         clear = new Button("Clear");
+        decimal = new Button(".");
 
         percent = new Button("%");
         exp = new Button("e");
@@ -81,6 +83,7 @@ public class IntermediateCalculator implements ActionListener {
         multiply.addActionListener(this);
         divide.addActionListener(this);
         calculate.addActionListener(this);
+        decimal.addActionListener(this);
         clear.addActionListener(this);
         percent.addActionListener(this);
         exp.addActionListener(this);
@@ -118,6 +121,7 @@ public class IntermediateCalculator implements ActionListener {
         calcPanel.add(divide);
         calcPanel.add(calculate);
         calcPanel.add(clear);
+        calcPanel.add(decimal);
 
         calcPanel.add(percent);
         calcPanel.add(exp);
@@ -207,6 +211,12 @@ public class IntermediateCalculator implements ActionListener {
             textField.setText(output);
         }
 
+        if(e.getSource() == decimal){
+            initialNumber = textField.getText();
+            currentNumber = ".";
+            output = initialNumber + currentNumber;
+            textField.setText(output);
+        }
 
 
         //Dual Operand Operations
@@ -284,8 +294,44 @@ public class IntermediateCalculator implements ActionListener {
 
 
 
+        //Temperature Calculations
+
+        if(e.getSource() == CtoF){
+            temperature = "CtoF";
+            initialNumber = textField.getText();
+            placeholder = textField.getText();
 
 
+            textField.setText("");
+            calcMode = "temperature";
+        }
+        if(e.getSource() == FtoC){
+            temperature = "FtoC";
+            initialNumber = textField.getText();
+            placeholder = textField.getText();
+
+
+            textField.setText("");
+            calcMode = "temperature";
+        }
+        if(e.getSource() == CtoK){
+            temperature = "CtoK";
+            initialNumber = textField.getText();
+            placeholder = textField.getText();
+
+
+            textField.setText("");
+            calcMode = "temperature";
+        }
+        if(e.getSource() == KtoC){
+            temperature = "KtoC";
+            initialNumber = textField.getText();
+            placeholder = textField.getText();
+
+
+            textField.setText("");
+            calcMode = "temperature";
+        }
 
 
 
