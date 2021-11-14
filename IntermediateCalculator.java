@@ -334,8 +334,7 @@ public class IntermediateCalculator implements ActionListener {
         }
 
 
-
-
+        //Logic for calling various operations
         if(e.getSource() == calculate){
 
             if(calcMode.equals("basic")){
@@ -349,6 +348,10 @@ public class IntermediateCalculator implements ActionListener {
                 System.out.println(operated);
                 textField.setText(String.valueOf(operated));
 
+            } else if (calcMode.equals("temperature")){
+                operated = TemperatureOperations.temperatureLogic(temperature, Double.parseDouble(placeholder));
+                System.out.println(operated);
+                textField.setText(String.valueOf(operated));
             }
             
      
