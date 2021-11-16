@@ -2,6 +2,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.security.DigestInputStream;
 
+import javax.swing.GroupLayout;
+
 
 
 public class IntermediateCalculator implements ActionListener {
@@ -16,17 +18,21 @@ public class IntermediateCalculator implements ActionListener {
     //Dual Operation Buttons
     private Button add,subtract,multiply,divide, calculate;
 
-    //Single operand
+    //Single operand Buttons
     private Button percent, exp, square, squareroot; 
 
-    //Temperature buttons
+    //Temperature Buttons
+
     private Button CtoF, FtoC, CtoK, KtoC;
+
+    //Weight Buttons
+    private Button LBtoKG, KGtoLB, OZtoG, GtoOZ; 
 
     //Additional buttons
     Button decimal, clear;
 
 
-    String initialNumber, currentNumber, output, basicoperation, placeholder, singleoperand, temperature;
+    String initialNumber, currentNumber, output, basicoperation, placeholder, singleoperand, temperature, weight;
     String calcMode;
 
     
@@ -71,6 +77,12 @@ public class IntermediateCalculator implements ActionListener {
         CtoK = new Button("C -> K");
         KtoC = new Button("K -> C");
 
+        LBtoKG = new Button("lb -> kg");
+        KGtoLB = new Button("kg -> lb");
+        OZtoG = new Button("oz -> g");
+        GtoOZ = new Button("g -> oz");
+
+
 
         //Add Listeners
         zero.addActionListener(this);
@@ -98,14 +110,18 @@ public class IntermediateCalculator implements ActionListener {
         FtoC.addActionListener(this);
         CtoK.addActionListener(this);
         KtoC.addActionListener(this);
+        LBtoKG.addActionListener(this);
+        KGtoLB.addActionListener(this);
+        OZtoG.addActionListener(this);
+        GtoOZ.addActionListener(this);
 
 
 
         //Needs to be played around with
-        textField = new TextField(20);
+        textField = new TextField(700);
         calcFrame.add(textField);
 
-        gridLayout = new GridLayout(4,4);
+        gridLayout = new GridLayout(5,5);
         calcFrame.setLayout(gridLayout);
 
 
@@ -140,8 +156,21 @@ public class IntermediateCalculator implements ActionListener {
         calcPanel.add(CtoK);
         calcPanel.add(KtoC);
 
+
+        //Add Weight Buttons
+        calcPanel.add(LBtoKG);
+        calcPanel.add(KGtoLB);
+        calcPanel.add(OZtoG);
+        calcPanel.add(GtoOZ);
+
+
+
+        //GroupLayout g = new GroupLayout(calcPanel);
+        //calcPanel.setLayout(g);
+
+
         calcFrame.add(calcPanel);
-        calcFrame.setSize(200,200);
+        calcFrame.setSize(700,700);
         calcFrame.setVisible(true);
         calcFrame.setBackground(Color.WHITE);
 
@@ -341,6 +370,50 @@ public class IntermediateCalculator implements ActionListener {
             calcMode = "temperature";
         }
 
+        //Weight Calculations
+        if(e.getSource()==LBtoKG){
+            weight = "LBtoKG";
+            initialNumber = textField.getText();
+            placeholder = textField.getText();
+
+            textField.setText("");
+            calcMode = "weight";
+        }
+
+        if(e.getSource()==KGtoLB){
+            weight = "KGtoLB";
+            initialNumber = textField.getText();
+            placeholder = textField.getText();
+
+            textField.setText("");
+            calcMode = "weight";
+        }
+
+        if(e.getSource()==OZtoG){
+            weight = "OZtoG";
+            initialNumber = textField.getText();
+            placeholder = textField.getText();
+
+            textField.setText("");
+            calcMode = "weight";
+
+        }
+
+        if(e.getSource()== GtoOZ){
+            weight = "GtoOZ";
+            initialNumber = textField.getText();
+            placeholder = textField.getText();
+
+            textField.setText("");
+            calcMode = "weight";
+        }
+
+
+
+
+
+
+
 
         //Logic for calling various operations when "=" is clicked
         if(e.getSource() == calculate){
@@ -358,6 +431,10 @@ public class IntermediateCalculator implements ActionListener {
 
             } else if (calcMode.equals("temperature")){
                 operated = TemperatureOperations.temperatureLogic(temperature, Double.parseDouble(placeholder));
+                System.out.println(operated);
+                textField.setText(String.valueOf(operated));
+            } else if (calcMode.equals("weight")){
+                operated = WeightConversion.weightLogic(weight, Double.parseDouble(placeholder));
                 System.out.println(operated);
                 textField.setText(String.valueOf(operated));
             }
