@@ -9,29 +9,34 @@ public class IntermediateCalculator implements ActionListener {
     Frame calcFrame;
     //Create Panel for Frame
     Panel calcPanel;
+
     //Buttons for numbers
     private Button zero,one,two,three,four,five,six,seven,eight,nine;
-    //Operation Buttons (need to add temp, metric to imperial, modulo, exponent, etc.)
+
+    //Dual Operation Buttons
     private Button add,subtract,multiply,divide, calculate;
+
+    //Single operand
     private Button percent, exp, square, squareroot; 
+
+    //Temperature buttons
     private Button CtoF, FtoC, CtoK, KtoC;
+
     //Additional buttons
     Button decimal, clear;
 
+
     String initialNumber, currentNumber, output, basicoperation, placeholder, singleoperand, temperature;
     String calcMode;
-    //String currentNumber, output, basicoperation;
 
     
     Double operated;
-
-
-
     TextField textField;
     GridLayout gridLayout;
     
 
     IntermediateCalculator() {
+        //Initalize Buttons
         calcFrame = new Frame("Calculator");
         calcFrame.setLayout(new FlowLayout());
         calcPanel = new Panel();
@@ -67,7 +72,7 @@ public class IntermediateCalculator implements ActionListener {
         KtoC = new Button("K -> C");
 
 
-
+        //Add Listeners
         zero.addActionListener(this);
         one.addActionListener(this);
         two.addActionListener(this);
@@ -104,7 +109,7 @@ public class IntermediateCalculator implements ActionListener {
         calcFrame.setLayout(gridLayout);
 
 
-
+        //Add our buttons to the panel
         calcPanel.add(zero);
         calcPanel.add(one);
         calcPanel.add(two);
@@ -123,12 +128,13 @@ public class IntermediateCalculator implements ActionListener {
         calcPanel.add(clear);
         calcPanel.add(decimal);
 
+        //Add Single Operand Buttons
         calcPanel.add(percent);
         calcPanel.add(exp);
         calcPanel.add(square);
         calcPanel.add(squareroot);
 
-
+        //Add Temperature Buttons
         calcPanel.add(CtoF);
         calcPanel.add(FtoC);
         calcPanel.add(CtoK);
@@ -138,7 +144,9 @@ public class IntermediateCalculator implements ActionListener {
         calcFrame.setSize(200,200);
         calcFrame.setVisible(true);
         calcFrame.setBackground(Color.WHITE);
-        //calcFrame.addWindowListener(new WindowAdapter(windowClosing(WindowEvent e)));
+
+
+        //Handler for window closing
         calcFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e){
                 System.exit(0);
@@ -146,8 +154,9 @@ public class IntermediateCalculator implements ActionListener {
         });
     }
 
+
+    //Listeners for each button
     public void actionPerformed(ActionEvent e){
-        //String initialNumber = "0";
         if(e.getSource() == zero){
             initialNumber = textField.getText();
             currentNumber = "0";
@@ -219,7 +228,7 @@ public class IntermediateCalculator implements ActionListener {
         }
 
 
-        //Dual Operand Operations
+        //Dual Operand Calculations
 
         if(e.getSource() == add){
             basicoperation = "add";
@@ -258,7 +267,6 @@ public class IntermediateCalculator implements ActionListener {
         if(e.getSource() == percent){
             singleoperand = "percent";
             initialNumber = textField.getText();
-            //May have to input placeholder in with 
             placeholder = textField.getText();
 
             textField.setText("");
@@ -334,7 +342,7 @@ public class IntermediateCalculator implements ActionListener {
         }
 
 
-        //Logic for calling various operations
+        //Logic for calling various operations when "=" is clicked
         if(e.getSource() == calculate){
 
             if(calcMode.equals("basic")){
@@ -353,18 +361,7 @@ public class IntermediateCalculator implements ActionListener {
                 System.out.println(operated);
                 textField.setText(String.valueOf(operated));
             }
-            
-     
-
-
-
-
         }
-
-
-
-
-
 
         if(e.getSource() == clear){
             textField.setText("");

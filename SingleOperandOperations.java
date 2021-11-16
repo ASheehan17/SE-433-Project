@@ -22,7 +22,6 @@ public class SingleOperandOperations {
         return ans;
     }
     
-    //needs work
     public static double calculateE(double input){
         double ans = Math.exp(input);
         return ans;

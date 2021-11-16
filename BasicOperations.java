@@ -23,7 +23,5 @@ public class BasicOperations {
         }
         return(result);
     }
-    /*public static float ops(float float1, float float2){
-        return answer;
-    }*/
+
 }
