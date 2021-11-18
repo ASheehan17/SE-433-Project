@@ -2,9 +2,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.security.DigestInputStream;
 
-import javax.swing.GroupLayout;
-
-
 
 public class IntermediateCalculator implements ActionListener {
     //Create Frame
@@ -29,7 +26,7 @@ public class IntermediateCalculator implements ActionListener {
     private Button LBtoKG, KGtoLB, OZtoG, GtoOZ; 
 
     //Additional buttons
-    Button decimal, clear;
+    Button decimal, negative, clear;
 
 
     String initialNumber, currentNumber, output, basicoperation, placeholder, singleoperand, temperature, weight;
@@ -58,24 +55,25 @@ public class IntermediateCalculator implements ActionListener {
         eight = new Button("8");
         nine = new Button("9");
         add = new Button("+");
-        subtract = new Button("-");
+        subtract = new Button("- (sub)");
         multiply = new Button("*");
         divide = new Button("/");
         calculate = new Button("=");
 
         clear = new Button("Clear");
         decimal = new Button(".");
+        negative  = new Button("- (neg)");
 
         percent = new Button("%");
         exp = new Button("e");
         square = new Button("^2");
         squareroot = new Button("sqrt");
 
-        CtoF = new Button("C -> F");
-        FtoC = new Button("F -> C");
+        CtoF = new Button("C° -> F°");
+        FtoC = new Button("F° -> C°");
 
-        CtoK = new Button("C -> K");
-        KtoC = new Button("K -> C");
+        CtoK = new Button("C° -> K°");
+        KtoC = new Button("K° -> C°");
 
         LBtoKG = new Button("lb -> kg");
         KGtoLB = new Button("kg -> lb");
@@ -101,6 +99,7 @@ public class IntermediateCalculator implements ActionListener {
         divide.addActionListener(this);
         calculate.addActionListener(this);
         decimal.addActionListener(this);
+        negative.addActionListener(this);
         clear.addActionListener(this);
         percent.addActionListener(this);
         exp.addActionListener(this);
@@ -143,6 +142,7 @@ public class IntermediateCalculator implements ActionListener {
         calcPanel.add(calculate);
         calcPanel.add(clear);
         calcPanel.add(decimal);
+        calcPanel.add(negative);
 
         //Add Single Operand Buttons
         calcPanel.add(percent);
@@ -253,6 +253,13 @@ public class IntermediateCalculator implements ActionListener {
             initialNumber = textField.getText();
             currentNumber = ".";
             output = initialNumber + currentNumber;
+            textField.setText(output);
+        }
+
+        if(e.getSource() == negative){
+            initialNumber = textField.getText();
+            currentNumber = "-";
+            output = initialNumber+currentNumber;
             textField.setText(output);
         }
 
